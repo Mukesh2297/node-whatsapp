@@ -43,7 +43,6 @@ app.post("/sendMessage",((req,res,next)=>{
             return dv.dispatchEvent(clickEvent);
         })
         const msgTarget = await page.$$("div[class='_3FRCZ copyable-text selectable-text']");
-        console.log(msgTarget);
         await msgTarget[1].type("Hello");
         await page.keyboard.press('Enter');
       })();
