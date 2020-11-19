@@ -1,0 +1,23 @@
+{
+  "name": "node-whatsapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mukesh2297/node-whatsapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mukesh2297/node-whatsapp/issues"
+  },
+  "homepage": "https://github.com/Mukesh2297/node-whatsapp#readme",
+  "dependencies": {
+    "puppeteer": "^5.5.0"
+  }
+}
