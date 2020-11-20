@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const puppeteer = require("puppeteer");
 
-const router = express.Router();
+//const router = express.Router();
 const app=express();
 
 const WHATSAPP_LOGIN_URL =
@@ -19,8 +19,11 @@ app.get("/",((req,res,next)=>{
 
 app.post("/sendMessage",((req,res,next)=>{
     console.log(req.body);
+    let contactName = req.body.name;
+    let contactNumber = req.body.number;
+    let messageToSend = req.body.message;
     (async () => {
-        const browser = await puppeteer.launch({headless: false });
+        const browser = await puppeteer.launch({userDataDir: './myUserDataDir', executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',headless: false });
         const page = await browser.newPage();
         await page.goto(WHATSAPP_LOGIN_URL, {
           waitUntil: "networkidle2",
@@ -30,9 +33,9 @@ app.post("/sendMessage",((req,res,next)=>{
           width: 1200,
           height: 2400,
         });
-        const target = await page.$("div [class='_3FRCZ copyable-text selectable-text']");
+        const target = await page.$("div [class='_1awRl copyable-text selectable-text']");
         await target.click();
-        await target.type(contactInput);
+        await target.type(contactName);
         const clickContact = await page.evaluate(()=>{
             let dv = document.querySelector("span[title='Ma Beech']").offsetParent.children[1]
             let clickEvent = new MouseEvent('mousedown', {
@@ -42,8 +45,8 @@ app.post("/sendMessage",((req,res,next)=>{
             });
             return dv.dispatchEvent(clickEvent);
         })
-        const msgTarget = await page.$$("div[class='_3FRCZ copyable-text selectable-text']");
-        await msgTarget[1].type("Hello");
+        const msgTarget = await page.$$("div[class='_1awRl copyable-text selectable-text']");
+        await msgTarget[1].type(messageToSend);
         await page.keyboard.press('Enter');
       })();
     
