@@ -8,7 +8,7 @@ const app=express();
 const WHATSAPP_LOGIN_URL =
   "https://web.whatsapp.com/";
 
-const contactInput = 'Ma Beech';
+//const contactInput = 'Ma Beech';
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -23,8 +23,9 @@ app.post("/sendMessage",((req,res,next)=>{
     let contactNumber = req.body.number;
     let messageToSend = req.body.message;
     (async () => {
-        const browser = await puppeteer.launch({userDataDir: './myUserDataDir', executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',headless: false });
+        const browser = await puppeteer.launch({userDataDir: './myUserDataDir'});
         const page = await browser.newPage();
+        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3641.0 Safari/537.36');
         await page.goto(WHATSAPP_LOGIN_URL, {
           waitUntil: "networkidle2",
         });
